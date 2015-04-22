@@ -4,6 +4,8 @@ var React = require('react');
 
 var Swipeable = React.createClass({
   propTypes: {
+    tagName: React.PropTypes.string,
+    component: React.PropTypes.element,
     onSwiped: React.PropTypes.func,
     onSwipingUp: React.PropTypes.func,
     onSwipingRight: React.PropTypes.func,
@@ -28,6 +30,7 @@ var Swipeable = React.createClass({
 
   getDefaultProps: function () {
     return {
+      tagName: 'div',
       flickThreshold: 0.6,
       delta: 10
     };
@@ -142,10 +145,13 @@ var Swipeable = React.createClass({
   },
 
   render: function () {
-    return React.createElement('div', React.__spread({}, this.props, {
+    var component = this.props.component || this.props.tagName;
+
+    return React.createElement(component, React.__spread({}, this.props, {
       onTouchStart: this.touchStart,
       onTouchMove: this.touchMove,
-      onTouchEnd: this.touchEnd
+      onTouchEnd: this.touchEnd,
+      onTouchCancel: this.touchEnd
     }), this.props.children);
   }
 });

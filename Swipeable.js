@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var assign = Object.assign || React.__spread;
 
 var Swipeable = React.createClass({
   propTypes: {
@@ -148,7 +149,7 @@ var Swipeable = React.createClass({
   render: function () {
     var component = this.props.component || this.props.tagName;
 
-    return React.createElement(component, React.__spread({}, this.props, {
+    return React.createElement(component, assign({}, this.props, {
       onTouchStart: this.touchStart,
       onTouchMove: this.touchMove,
       onTouchEnd: this.touchEnd,

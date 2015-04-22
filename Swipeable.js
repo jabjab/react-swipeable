@@ -37,8 +37,8 @@ var Swipeable = React.createClass({
     var x = e.changedTouches[0].clientX;
     var y = e.changedTouches[0].clientY;
 
-    var xd = this.state.x - x;
-    var yd = this.state.y - y;
+    var xd = x - this.state.x;
+    var yd = y - this.state.y;
 
     var axd = Math.abs(xd);
     var ayd = Math.abs(yd);
@@ -76,7 +76,7 @@ var Swipeable = React.createClass({
     }
 
     if (pos.absX > pos.absY) {
-      if (pos.deltaX > 0) {
+      if (pos.deltaX < 0) {
         if (this.props.onSwipingLeft) {
           this.props.onSwipingLeft(e, pos.absX);
           cancelPageSwipe = true;
@@ -124,7 +124,7 @@ var Swipeable = React.createClass({
       );
 
       if (pos.absX > pos.absY) {
-        if (pos.deltaX > 0) {
+        if (pos.deltaX < 0) {
           this.props.onSwipedLeft && this.props.onSwipedLeft(ev, pos.deltaX);
         } else {
           this.props.onSwipedRight && this.props.onSwipedRight(ev, pos.deltaX);
